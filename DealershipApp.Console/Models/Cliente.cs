@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace DealershipApp.Console.Models
 {
@@ -11,6 +14,12 @@ namespace DealershipApp.Console.Models
         public string ApellidoCliente { get; set; }
         public string DireccionCliente { get; set; }
         public string CorreoCliente { get; set; }
-        public uint TelefonoCliente { get; set; }
+        public int TelefonoCliente { get; set; }
+
+        public override string ToString()// Mi propia version del metodo ToString
+        {
+            //Mi string personalizado para mostrar la informacion del empleado
+            return $"{IdCliente} {NombreCliente} {ApellidoCliente} - {DireccionCliente} - {CorreoCliente} - {TelefonoCliente}";
+        }
     }
 }

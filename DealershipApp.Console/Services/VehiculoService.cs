@@ -7,18 +7,34 @@ namespace DealershipApp.Console.Services
 {
     public class VehiculoService
     {
+        private List<Vehiculos> vehiculos = new List<Vehiculos>();
         public Vehiculos CrearVehiculo(int id, string nombre, int modelo, int cantidad, bool disponible, string color, string marca)
         {
-            return new Vehiculos
+            if (id <= 0)
             {
-                IdVehiculo = id,
-                NombreVehiculo = nombre,
-                Modelo = modelo,
-                Cantidad = cantidad,
-                Disponible = disponible,
-                Color = color,
-                Marca = marca
-            };
+                return null;
+            }else if (nombre == "" || marca == "")
+            {
+                return null;
+            }else if (modelo == 0 || cantidad < 0)
+            {
+                return null;
+            }
+            else
+            {
+                Vehiculos vehiculo = new Vehiculos
+                {
+                    IdVehiculo = id,
+                    NombreVehiculo = nombre,
+                    Modelo = modelo,
+                    Cantidad = cantidad,
+                    Disponible = disponible,
+                    Color = color,
+                    Marca = marca
+                };
+                vehiculos.Add(vehiculo);
+                return vehiculo;
+            }
         }
 
         public void MostrarVehiculos(Vehiculos vehiculo)
@@ -28,6 +44,37 @@ namespace DealershipApp.Console.Services
             System.Console.WriteLine($"Informacion del vehiculo | Nombre: {vehiculo.NombreVehiculo} | Marca: {vehiculo.Marca} | Modelo: {vehiculo.Modelo} | Color: {vehiculo.Color} ");
             System.Console.WriteLine($"Quedan disponibles? {vehiculo.Disponible}");
             System.Console.WriteLine($"Quedan en total: {vehiculo.Cantidad}");
+        }
+        public void MostrarListaVehiculos()
+        {
+            foreach (var veh in vehiculos)
+            {
+                System.Console.WriteLine(veh);
+            }
+
+        }
+        public void EliminarVehiculo(int id)
+        {
+            Vehiculos vehiculoEncontrado = null;// Se inicia en null
+
+            foreach (var v in vehiculos)
+            {
+                if (v.IdVehiculo == id)
+                {
+                    vehiculoEncontrado = v; // Si lo encuentra se asigna v 
+                    break;
+                }
+            }
+            if (vehiculoEncontrado == null)
+            {
+                System.Console.WriteLine("Vehículo no encontrado");
+            }
+            else
+            {
+                vehiculos.Remove(vehiculoEncontrado);// Elimina el vehiculo
+                System.Console.WriteLine("Vehículo eliminado correctamente");
+            }
+
         }
     }
 }

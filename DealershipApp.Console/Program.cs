@@ -1,18 +1,70 @@
 ﻿using DealershipApp.Console.Models;
 using DealershipApp.Console.Services;
 
-EmpleadoService empleadoService = new EmpleadoService(); // Toca traer la clase EmpleadoService para instanciarlo
+/*Console.WriteLine("Bienvenido, ingresa un nuevo empleado");
 
-//Se crea el empleado con el servicio
-Empleado empleado = empleadoService.CrearEmpleado(1, "Jair", "Duarte", 312465341, "djduarterojas2212@gmail.com", "Backend", 2500);
-empleadoService.MostrarEmpleado(empleado);// empleado de crearempleado
-Console.WriteLine("-------------------------------------------------------------------");
-VehiculoService vehiculoService = new VehiculoService();
-Vehiculos vehiculo = vehiculoService.CrearVehiculo(1, "Yaris", 2009, 50, true, "Rojo", "Toyota");
-vehiculoService.MostrarVehiculos(vehiculo);
-Console.WriteLine("-------------------------------------------------------------------");
-ClienteService clienteService = new ClienteService();
-Cliente cliente = clienteService.CrearCliente(1, "Nataly", "Zuñiga", "Calle 123", "nataly@gmail.com", 3259784456);
-clienteService.MostrarCliente(cliente);
+EmpleadoService empleadoService = new EmpleadoService(); // Nueva instancia del servicio
+
+Console.Write("ID: ");
+int id = int.Parse(Console.ReadLine());
+
+Console.Write("Nombre: ");
+string nombre = Console.ReadLine();
+
+Console.Write("Apellido: ");
+string apellido = Console.ReadLine();
+
+Console.Write("Teléfono: ");
+int telefono = int.Parse(Console.ReadLine());
+
+Console.Write("Correo: ");
+string correo = Console.ReadLine();
+
+Console.Write("Cargo: ");
+string cargo = Console.ReadLine();
+
+Console.Write("Salario: ");
+decimal salario = decimal.Parse(Console.ReadLine());
+
+Empleado empleadoCreado = empleadoService.CrearEmpleado(
+    id, nombre, apellido, telefono, correo, cargo, salario // Datos de la funcion CrearEmpleado
+);
+
+empleadoService.MostrarEmpleado(empleadoCreado); // Muestra el empleado creado
+empleadoService.MostrarLista();*/
+
+Console.WriteLine("Ingresa un nuevo Vehiculo");
+
+VehiculoService vehiculoService = new VehiculoService(); // Nueva instancia del servicio
+
+Console.Write("ID: ");
+int id = int.Parse(Console.ReadLine());
+
+Console.Write("Nombre: ");
+string nombre = Console.ReadLine();
+
+Console.Write("Modelo: ");
+int modelo = int.Parse(Console.ReadLine());
+
+Console.Write("Cantidad actual: ");
+int cantidad = int.Parse(Console.ReadLine());
+
+Console.Write("Disponible?: ");
+bool disponible = bool.Parse(Console.ReadLine());
+
+Console.Write("Color: ");
+string color = Console.ReadLine();
+
+Console.Write("Marca: ");
+string marca = Console.ReadLine();
+
+Vehiculos vehiculoCreado = vehiculoService.CrearVehiculo(
+    id, nombre, modelo, cantidad, disponible, color, marca // Datos de la funcion CrearEmpleado
+);
+
+vehiculoService.MostrarVehiculos(vehiculoCreado); // Muestra el empleado creado*/
+vehiculoService.MostrarListaVehiculos();
+
+
 
 

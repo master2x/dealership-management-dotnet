@@ -13,5 +13,13 @@ namespace DealershipApp.Console.Models
         public string Correo { get; set; }
         public string Cargo { get; set; }
         public decimal Salario { get; set; }
+
+        public override string ToString()// Mi propia version del metodo ToString
+        {
+            //Mi string personalizado para mostrar la informacion del empleado
+            return $"[{IdEmpleado}] {Nombre} {Apellido} - {Cargo} - ${Salario}";
+        }
     }
+   
 }
+
