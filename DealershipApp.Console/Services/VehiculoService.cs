@@ -76,5 +76,49 @@ namespace DealershipApp.Console.Services
             }
 
         }
+
+        public void ActualizarModelo(int id, int modelo)
+        {
+            var vehiculo = vehiculos.Find(v => v.IdVehiculo == id);
+
+            if (vehiculo == null)
+            {
+                System.Console.WriteLine("Vehículo no encontrado");
+                return;
+            }
+
+            vehiculo.Modelo = modelo;
+            System.Console.WriteLine("Modelo actualizado");
+        }
+
+        public void ActualizarCantidad(int id, int cantidad)
+        {
+            var vehiculo = vehiculos.Find(v => v.IdVehiculo == id);
+
+            if (vehiculo == null)
+            {
+                System.Console.WriteLine("Vehículo no encontrado");
+                return;
+            }
+
+            vehiculo.Cantidad = cantidad;
+            System.Console.WriteLine("Modelo actualizado");
+        }
+
+        public void ActualizarNombre(int id, string nombre)
+        {
+            var vehiculo = vehiculos.Find(v => v.IdVehiculo == id);
+
+            if (vehiculo == null)
+            {
+                System.Console.WriteLine("Vehículo no encontrado");
+                return;
+            }
+
+            vehiculo.NombreVehiculo = nombre;
+            System.Console.WriteLine("Nombre actualizado");
+        }
+
+
     }
 }

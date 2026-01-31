@@ -11,7 +11,7 @@ namespace DealershipApp.Console.Services
         private List<Cliente> clientes = new List<Cliente>();
         public Cliente CrearCliente(int id, string nombre, string apellido, string direccion, string correo, int telefono)
         {
-            if (id < 0)
+            if (id <= 0)
             {
                 return null;
             }
@@ -58,6 +58,66 @@ namespace DealershipApp.Console.Services
                 clientes.Remove(clienteEncontrado);
                 System.Console.WriteLine("Cliente eliminado");
             }
+        }
+
+        public void MostrarListaClientes()
+        {
+            foreach (var cli in clientes)
+            {
+                System.Console.WriteLine(cli);
+            }
+
+        }
+        public void ActualizarNombreCliente(int id, string nombre)
+        {
+            var cliente = clientes.Find(c => c.IdCliente == id);
+
+            if(cliente == null)
+            {
+                System.Console.WriteLine("Cliente no encontrado");
+                return;
+            }
+            cliente.NombreCliente = nombre;
+            System.Console.WriteLine("Nombre actualizado");
+        }
+        public void ActualizarApellidoCliente(int id, string apellido)
+        {
+            var cliente = clientes.Find(c => c.IdCliente == id);
+
+            if (cliente == null)
+            {
+                System.Console.WriteLine("Cliente no encontrado");
+                return;
+            }
+            cliente.ApellidoCliente = apellido;
+            System.Console.WriteLine("Nombre actualizado");
+
+        }
+        public void ActualizarDireccionCliente(int id, string direccion)
+        {
+            var cliente = clientes.Find(c => c.IdCliente == id);
+
+            if (cliente == null)
+            {
+                System.Console.WriteLine("Cliente no encontrado");
+                return;
+            }
+            cliente.DireccionCliente = direccion;
+            System.Console.WriteLine("Nombre actualizado");
+
+        }
+        public void ActualizarTelefonoCliente(int id, int telefono)
+        {
+            var cliente = clientes.Find(c => c.IdCliente == id);
+
+            if (cliente == null)
+            {
+                System.Console.WriteLine("Cliente no encontrado");
+                return;
+            }
+            cliente.TelefonoCliente = telefono;
+            System.Console.WriteLine("Nombre actualizado");
+
         }
     }
 }
