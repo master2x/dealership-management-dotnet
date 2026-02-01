@@ -18,16 +18,22 @@ namespace DealershipApp.Console.Services
                 return null;
 
             }
-            else if (nombre == "" || apellido == "")
+            else if (nombre == "" || apellido == "" || correo == "" || telefono <= 0)
             {
-                return null;
-            }
-            else if (correo == "" || telefono <= 0)
-            {
+                System.Console.WriteLine("Faltan datos del empleado");
                 return null;
             }
             else if (id <= 0)
             {
+                return null;
+            }else if (empleados.Any(e => e.IdEmpleado == id))
+            {
+                System.Console.WriteLine("El ID del empleado ya existe");
+                return null;
+            }
+            else if (!correo.Contains("@"))
+            {
+                System.Console.WriteLine("Correo inválido");
                 return null;
             }
             else
@@ -66,6 +72,51 @@ namespace DealershipApp.Console.Services
             }
 
         }
+        public void EmpleadoPorCargo()
+        {
+            var datos = empleados
+                .GroupBy(e => e.Cargo)
+                .Select(grupo => new
+                {
+                    Cargo = grupo.Key,
+                    Empleados = grupo.ToList()
+                });
+            foreach ( var grupo in datos)
+            {
+                System.Console.WriteLine($"Cargo: {grupo.Cargo}");
+
+                foreach (var empleado in grupo.Empleados)
+                { 
+                    System.Console.WriteLine($"Nombre: {empleado.Nombre} | Apellido: {empleado.Apellido} | Cargo: {empleado.Cargo}");
+                }
+            }
+            
+        }
+
+        public void SalariosAltos()
+        {
+            var datos = empleados
+                .GroupBy(e => e.Salario >= 300000)
+                .Select(grupo => new
+                {
+                    Salario = grupo.Key,
+                    Empleados = grupo.ToList()
+                });
+            foreach (var grupo in datos)
+            {
+                System.Console.WriteLine("Salario mayor a 300000: " + grupo.Salario);
+                foreach (var empleado in grupo.Empleados)
+                {
+                    System.Console.WriteLine($"Nombre: {empleado.Nombre} | Apellido: {empleado.Apellido} | Salario: {empleado.Salario}");
+                } 
+            }
+        }
+
+        public Empleado BuscarEmpleadoPorCorreo(string correo)
+        {
+            return empleados.FirstOrDefault(c => c.Correo == correo);
+        }
+
         public void EliminarEmpleado(int id)
         {
             var empleadoEncontrado = empleados.FirstOrDefault(e => e.IdEmpleado == id);

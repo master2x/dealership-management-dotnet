@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using DealershipApp.Console.Models;
@@ -17,6 +18,15 @@ namespace DealershipApp.Console.Services
             }
             else if (nombre == "" || apellido == "" || direccion == "" || correo == "" || telefono == 0)
             {
+                System.Console.WriteLine("Faltan datos del cliente");
+                return null;
+            } else if (clientes.Any(c => c.IdCliente == id))
+            {
+                System.Console.WriteLine("El ID del cliente ya existe");
+                return null;
+            } else if (!correo.Contains("@"))
+            {
+                System.Console.WriteLine("Correo inválido");
                 return null;
             }
             else
@@ -60,6 +70,12 @@ namespace DealershipApp.Console.Services
             }
 
         }
+
+        public Cliente BuscarClientePorCorreo(string correo)
+        {
+            return clientes.FirstOrDefault(c => c.CorreoCliente == correo);
+        }
+
         public void ActualizarNombreCliente(int id, string nombre)
         {
             var cliente = clientes.Find(c => c.IdCliente == id);

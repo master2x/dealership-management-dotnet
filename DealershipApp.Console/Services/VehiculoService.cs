@@ -58,10 +58,25 @@ namespace DealershipApp.Console.Services
             vehiculos.ForEach(v => System.Console.WriteLine(v));
 
         } 
-        public List<Vehiculos> DatosVehiculo()
+        public void VerDatosVehiculo()
         {
-            
-                
+            var datos = vehiculos
+                        .GroupBy( v => v.Marca) // Agrupalos por su propiedad
+                        .Select(grupo => new
+                        {
+                            Marca = grupo.Key,
+                            Vehiculos = grupo.ToList()
+
+                        });
+            foreach (var grupo in datos)// Por cada marca 
+            {
+                System.Console.WriteLine($"Marca: {grupo.Marca}");
+
+                foreach (var vehiculo in grupo.Vehiculos)// Por cada vehiculo de esa marca
+                {
+                    System.Console.WriteLine($" - {vehiculo.NombreVehiculo} | Modelo: {vehiculo.Modelo} | {vehiculo.Color}");
+                }
+            }    
         }
         
         public List<Vehiculos> obtenerVehiculosDisponibles()
