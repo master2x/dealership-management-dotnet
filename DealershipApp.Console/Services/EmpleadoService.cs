@@ -68,15 +68,8 @@ namespace DealershipApp.Console.Services
         }
         public void EliminarEmpleado(int id)
         {
-            Empleado empleadoEncontrado = null;
-            foreach (var e in empleados)
-            {
-                if (e.IdEmpleado == id)
-                {
-                    empleadoEncontrado = e;
-                    break;
-                }
-            }
+            var empleadoEncontrado = empleados.FirstOrDefault(e => e.IdEmpleado == id);
+
             if (empleadoEncontrado == null)
             {
                 System.Console.WriteLine("Empleado no encontrado");

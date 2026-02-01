@@ -16,7 +16,7 @@ namespace DealershipApp.Console.Practicas
     {
         static void Main(string[] args)  // ✅ Punto de entrada
         {
-            
+
             var colas = new List<Cola>()
             {
                 new Cola(){Nombre = "Mandarina", Marca = "Postobon", Precio= 2500},
@@ -25,7 +25,7 @@ namespace DealershipApp.Console.Practicas
                 new Cola(){Nombre = "Uva", Marca = "Postobon", Precio= 3000}
             };
 
-           
+
             var names = from c in colas
                         select new { c.Nombre, c.Marca }// Consulta multiple
             ;
@@ -34,10 +34,35 @@ namespace DealershipApp.Console.Practicas
                        where c.Nombre == "Manzana"
                        select new { c.Marca, c.Nombre };
 
-            foreach (var name in mine)
+
+            // Method Syntax
+            var mine2 = colas.Where(b => b.Precio >= 3000)
+            .Select(b => new { b.Nombre, b.Precio });
+
+
+            // ORDER BY
+            var mine3 = from c in colas
+                        where c.Nombre == "Manzana" || c.Precio >= 3000
+                        orderby c.Nombre descending // de forma descendente
+                        select new { c.Marca, c.Nombre };
+            // Group by
+            var mine4 = from c in colas
+                        group c by c.Marca into Marquiñas
+                        select new
+                        {
+                            Marca = Marquiñas.Key,
+                            Count = Marquiñas.Count()// Nueva variable donde contara los elementos del grupo
+                        };
+
+            foreach (var c in mine4)
+            {
+                System.Console.WriteLine(c.Marca + "" + c.Count);
+            }
+
+            foreach (var name in mine3)
             {
                 System.Console.WriteLine(name.Nombre);
             }
         }
     }
-}
+}   

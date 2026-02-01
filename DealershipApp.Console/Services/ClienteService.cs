@@ -43,16 +43,8 @@ namespace DealershipApp.Console.Services
 
         public void EliminarCliente (int id)
         {
-            Cliente clienteEncontrado = null;
-            foreach (var c in clientes)
-            {
-                if (c.IdCliente == id)
-                {
-                    clienteEncontrado = c;
-                    System.Console.WriteLine("Cliente encontrado");
-                    break;
-                }
-            }
+            var clienteEncontrado = clientes.FirstOrDefault(c => c.IdCliente == id);
+
             if (clienteEncontrado != null)
             {
                 clientes.Remove(clienteEncontrado);

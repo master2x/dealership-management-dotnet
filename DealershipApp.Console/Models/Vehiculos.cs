@@ -16,6 +16,7 @@ namespace DealershipApp.Console.Models
         public string Color { get; set; }
         public string Marca { get; set; }
 
+
         public override string ToString()// Mi propia version del metodo ToString
         {
             //Mi string personalizado para mostrar la informacion del empleado

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using DealershipApp.Console.Models;
+using System.Linq;
+using System.Security.Cryptography;
 
 namespace DealershipApp.Console.Services
 {
@@ -13,11 +15,15 @@ namespace DealershipApp.Console.Services
             if (id <= 0)
             {
                 return null;
-            }else if (nombre == "" || marca == "")
+            } else if (nombre == "" || marca == "")
             {
                 return null;
-            }else if (modelo == 0 || cantidad < 0)
+            } else if (modelo == 0 || cantidad < 0)
             {
+                return null;
+            } else if (vehiculos.Any(v => v.IdVehiculo == id))
+            {
+                System.Console.WriteLine("El ID ya existe");
                 return null;
             }
             else
@@ -45,26 +51,36 @@ namespace DealershipApp.Console.Services
             System.Console.WriteLine($"Quedan disponibles? {vehiculo.Disponible}");
             System.Console.WriteLine($"Quedan en total: {vehiculo.Cantidad}");
         }
+
+        //Metodos LINQ
         public void MostrarListaVehiculos()
         {
-            foreach (var veh in vehiculos)
-            {
-                System.Console.WriteLine(veh);
-            }
+            vehiculos.ForEach(v => System.Console.WriteLine(v));
 
+        } 
+        public List<Vehiculos> DatosVehiculo()
+        {
+            
+                
+        }
+        
+        public List<Vehiculos> obtenerVehiculosDisponibles()
+        {
+            return vehiculos
+                .Where(v => v.Disponible)
+                .ToList();
+        }
+        public List<Vehiculos> obtenerVehiculosRenault()
+        {
+            return vehiculos
+                .Where(v => v.Marca.ToLower() == "renault")
+                .ToList();
         }
         public void EliminarVehiculo(int id)
         {
-            Vehiculos vehiculoEncontrado = null;// Se inicia en null
 
-            foreach (var v in vehiculos)
-            {
-                if (v.IdVehiculo == id)
-                {
-                    vehiculoEncontrado = v; // Si lo encuentra se asigna v 
-                    break;
-                }
-            }
+            var vehiculoEncontrado = vehiculos.FirstOrDefault(v => v.IdVehiculo == id);// Busca el vehiculo por ID
+
             if (vehiculoEncontrado == null)
             {
                 System.Console.WriteLine("Vehículo no encontrado");
@@ -76,6 +92,8 @@ namespace DealershipApp.Console.Services
             }
 
         }
+
+        /*Actualizaciones*/
 
         public void ActualizarModelo(int id, int modelo)
         {
@@ -122,3 +140,4 @@ namespace DealershipApp.Console.Services
 
     }
 }
+      
